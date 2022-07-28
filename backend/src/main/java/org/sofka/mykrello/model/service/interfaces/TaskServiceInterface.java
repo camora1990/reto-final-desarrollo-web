@@ -10,4 +10,6 @@ public interface TaskServiceInterface {
     public TaskDomain create(TaskDomain task);
     public TaskDomain update(Integer id, TaskDomain task);
     public TaskDomain delete(Integer id);
+
+    public  List<TaskDomain> findAllByColumnAndAndBoard(Integer idColumn, Integer idBoard);
 }
