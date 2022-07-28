@@ -24,6 +24,9 @@ public class TaskService implements TaskServiceInterface {
     @Autowired
     private ColumnRepository columnRepository;
 
+    @Autowired
+    private BoardService boardService;
+
 
     @Override
     public List<TaskDomain> findAllTasksById(Integer idBoard) {
@@ -39,7 +42,10 @@ public class TaskService implements TaskServiceInterface {
     @Override
     @Transactional(readOnly = false)
     public TaskDomain create(TaskDomain task) {
-
+        var verifyBoard = boardService.findById(task.getBoard());
+        if (verifyBoard == null) return null;
+        var verifycolum = columnRepository.findById(task.getColumn()).orElse(null);
+        if (verifycolum == null) return null;
         var newTask = taskRepository.save(task);
         var colum = columnRepository.findById(task.getColumn()).orElse(null);
         var log = new LogDomain(newTask.getId(), colum, colum);

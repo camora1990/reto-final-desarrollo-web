@@ -25,4 +25,10 @@ public class MyResponseUtility {
         this.error = error;
         this.message = message;
     }
+
+    public void newResponse (Boolean error, String message){
+        this.data = data;
+        this.error = error;
+        this.message = message;
+    }
 }
