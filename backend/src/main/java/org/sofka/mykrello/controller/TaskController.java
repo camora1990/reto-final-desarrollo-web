@@ -1,5 +1,6 @@
 package org.sofka.mykrello.controller;
 
+import org.sofka.mykrello.model.domain.ColumnDomain;
 import org.sofka.mykrello.model.domain.TaskDomain;
 import org.sofka.mykrello.model.service.TaskService;
 import org.sofka.mykrello.utilities.MyResponseUtility;
@@ -67,6 +68,14 @@ public class TaskController {
     public ResponseEntity<MyResponseUtility> updateTask(@PathVariable("id") Integer taskId, @RequestBody TaskDomain task) {
         var taskUpdate = taskService.update(taskId, task);
         response.newResponse(false, "Task updated successfully", taskUpdate);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/change-column/{id}")
+    public ResponseEntity<MyResponseUtility> chageColumn(@PathVariable("id")Integer taskId, @RequestBody TaskDomain task){
+        var taskUpdate = taskService.changeColumn(taskId, task);
+        response.newResponse(false, "succesful column change", taskUpdate);
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

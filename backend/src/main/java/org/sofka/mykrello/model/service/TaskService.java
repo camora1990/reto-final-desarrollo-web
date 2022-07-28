@@ -1,5 +1,6 @@
 package org.sofka.mykrello.model.service;
 
+import org.sofka.mykrello.model.domain.ColumnDomain;
 import org.sofka.mykrello.model.domain.LogDomain;
 import org.sofka.mykrello.model.domain.TaskDomain;
 import org.sofka.mykrello.model.repository.ColumnRepository;
@@ -46,6 +47,7 @@ public class TaskService implements TaskServiceInterface {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public TaskDomain update(Integer id, TaskDomain task) {
         var verifyTask = taskRepository.findById(id).orElse(null);
         if (verifyTask == null) return null;
@@ -61,7 +63,7 @@ public class TaskService implements TaskServiceInterface {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public TaskDomain delete(Integer id) {
         var task = taskRepository.findById(id).orElse(null);
         if (task == null) return null;
@@ -74,4 +76,20 @@ public class TaskService implements TaskServiceInterface {
     public List<TaskDomain> findAllByColumnAndAndBoard(Integer idColumn, Integer idBoard) {
         return taskRepository.findAllByColumnAndAndBoard(idColumn, idBoard);
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public TaskDomain changeColumn(Integer id, TaskDomain task) {
+        var verifyTask = taskRepository.findById(id).orElse(null);
+        if(verifyTask == null) return null;
+        var newColumn = columnRepository.findById(task.getColumn()).orElse(null);
+        if(newColumn == null) return null;
+        var log = new LogDomain(id, verifyTask.getColumnDomain(), newColumn);
+        verifyTask.setColumn(newColumn.getId());
+        logService.create(log);
+        taskRepository.save(verifyTask);
+        return verifyTask;
+    }
+
+
 }
