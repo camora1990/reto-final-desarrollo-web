@@ -1,29 +1,59 @@
 package org.sofka.mykrello.model.service;
 
-import lombok.AllArgsConstructor;
 import org.sofka.mykrello.model.domain.BoardDomain;
 import org.sofka.mykrello.model.domain.ColumnForBoardDomain;
 import org.sofka.mykrello.model.repository.BoardRepository;
 import org.sofka.mykrello.model.repository.ColumnForBoardRepository;
 import org.sofka.mykrello.model.repository.ColumnRepository;
+import org.sofka.mykrello.model.repository.LogRepository;
+import org.sofka.mykrello.model.repository.TaskRepository;
 import org.sofka.mykrello.model.service.interfaces.BoardServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+/**
+ * Servicios Board
+ * @author Camilo Morales S - juan Camilo Castañeada
+ * @version 1.0.0
+ */
 @Service
-@AllArgsConstructor
 public class BoardService implements BoardServiceInterface {
 
 
+    /**
+     * Inyeccion dependencia repositorio board
+     */
+    @Autowired
     private BoardRepository boardRepository;
 
-
+    /**
+     * Inyeccion dependencia repositorio column
+     */
+    @Autowired
     private ColumnRepository columnRepository;
 
-
+    /**
+     * Inyeccion dependencia repositorio columForBoard
+     */
+    @Autowired
     private ColumnForBoardRepository columnForBoardRepository;
+
+    /**
+     * Inyeccion dependencia repositorio task
+     */
+    @Autowired
+    private TaskRepository taskRepository;
+
+    /**
+     * Inyeccion dependencia repositorio log
+     */
+    @Autowired
+    private LogRepository logRepository;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -69,12 +99,28 @@ public class BoardService implements BoardServiceInterface {
             var board = optionalBoard.get();
             var columnsForBoard = board.getColumnsForBoard();
             if (!columnsForBoard.isEmpty()) {
-                columnForBoardRepository.deleteAll(columnsForBoard); //  refactorizado
+                for (ColumnForBoardDomain column: columnsForBoard){
+                    deleteTasks(column.getColumn().getId(), board.getId());            // Borrado en casacda tareas
+                }
+                columnForBoardRepository.deleteAll(columnsForBoard);
             }
             boardRepository.delete(optionalBoard.get());
             return optionalBoard.get();
         }
         return null;
+    }
+
+    @Transactional
+    public void deleteTasks(Integer idColumn, Integer idBoard){
+        var tasks = taskRepository.findAllByColumnAndAndBoard(idColumn,idBoard);
+        if (!tasks.isEmpty()) {
+          tasks.forEach(task-> {
+              logRepository.deleteByTask(task.getId());                               // Elimina los logs correspondientes a la tarea
+              taskRepository.deleteById(task.getId());                                // Elimina la tarea
+          });
+
+        }
+
     }
 
 }

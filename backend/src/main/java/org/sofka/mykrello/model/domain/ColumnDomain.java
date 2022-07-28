@@ -1,6 +1,6 @@
 package org.sofka.mykrello.model.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -45,16 +45,8 @@ public class ColumnDomain implements Serializable {
     @Column(name = "clm_updated_at")
     private Instant updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, cascade = CascadeType.ALL, mappedBy = "previous")
-    @JsonManagedReference(value = "logPrevious")
-    private List<LogDomain> logPrevious = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, cascade = CascadeType.ALL, mappedBy = "current")
-    @JsonManagedReference(value = "logCurrent")
-    private List<LogDomain> logCurrent = new ArrayList<>();
-
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "column")
-    @JsonManagedReference(value = "columnForBoards")
+    @JsonBackReference(value = "column-columnForBoard")
     private List<ColumnForBoardDomain> columnForBoards = new ArrayList<>();
 
 
