@@ -1,6 +1,5 @@
 package org.sofka.mykrello.controller;
 
-import org.sofka.mykrello.model.domain.ColumnDomain;
 import org.sofka.mykrello.model.domain.TaskDomain;
 import org.sofka.mykrello.model.service.TaskService;
 import org.sofka.mykrello.utilities.MyResponseUtility;
@@ -17,17 +16,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador para realizar las consultas correspondientes a las tareas
+ *
+ * @author Camilo Morales S - juan Camilo Castañeada
+ * @version 1.0.0
+ */
+
 @CrossOrigin(value = "*")
 @RequestMapping(value = "/api/v1/task")
 @RestController
 public class TaskController {
 
+    /**
+     * Inyección de dependencia componente de respuestas
+     */
     @Autowired
     private MyResponseUtility response;
 
+    /**
+     * Inyección de dependencia servicios de las tareas
+     */
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Obtiene una tarea por id
+     *
+     *
+     * @return respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @GetMapping("/{id}")
     public ResponseEntity<MyResponseUtility> getTask(@PathVariable(name = "id") Integer taskId) {
         var task = taskService.findById(taskId);
@@ -35,6 +54,12 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Endpoint para creacion de tarea
+     * @param task - Objeto de tipo tarea
+     * @return Respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @PostMapping("/")
     public ResponseEntity<MyResponseUtility> createTask(@RequestBody TaskDomain task) {
         var newTask = taskService.create(task);
@@ -43,6 +68,12 @@ public class TaskController {
 
     }
 
+    /**
+     * Enpoint para eliminar una tarea por id
+     * @param taskId - id de la tarea a eliminar
+     * @return Respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<MyResponseUtility> deleteTask(@PathVariable(name = "id") Integer taskId) {
         var tasDeleted = taskService.delete(taskId);
@@ -50,6 +81,12 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Endpoint para obtener l as tarea por tablero
+     * @param idBoard - id del tablero
+     * @return Respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @GetMapping("/board-task/{idBoard}")
     public ResponseEntity<MyResponseUtility> getTasks(@PathVariable(name = "idBoard") Integer idBoard) {
         var tasks = taskService.findAllTasksById(idBoard);
@@ -57,6 +94,13 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Endpoint para obtener las tareas por tablero y por columna
+     * @param idBoartd - id del tablero
+     * @param idColum -id de la columna
+     * @return Respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @GetMapping("/{idBoard}/{idColum}")
     public ResponseEntity<MyResponseUtility> getTaskByColumn(@PathVariable("idBoard") Integer idBoartd, @PathVariable("idColum") Integer idColum) {
         var taks = taskService.findAllByColumnAndAndBoard(idColum, idBoartd);
@@ -64,6 +108,13 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Endpoint para actualizar la tarea por id
+     * @param taskId - id de la tarea a actualizar
+     * @param task - Objeto de tipo tarea con los campos a actualizar
+     * @return Respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @PutMapping("/{id}")
     public ResponseEntity<MyResponseUtility> updateTask(@PathVariable("id") Integer taskId, @RequestBody TaskDomain task) {
         var taskUpdate = taskService.update(taskId, task);
@@ -71,6 +122,13 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Endopint para cambiar la tarea de columna
+     * @param taskId - id de la tarea
+     * @param task - Objeto tipo tarea con la columna a cambiar
+     * @return Respuesta personalizada
+     * @author Camilo Morales S - juan Camilo Castañeada
+     */
     @PutMapping("/change-column/{id}")
     public ResponseEntity<MyResponseUtility> chageColumn(@PathVariable("id")Integer taskId, @RequestBody TaskDomain task){
         var taskUpdate = taskService.changeColumn(taskId, task);
@@ -78,6 +136,5 @@ public class TaskController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
 
 }

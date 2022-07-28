@@ -45,6 +45,7 @@ public class BoardDomain implements Serializable {
     @Column(name = "brd_updated_at")
     private Instant updatedAt;
 
+
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "board")
     @JsonManagedReference(value = "columnsForBoard")
     @JsonIgnore
