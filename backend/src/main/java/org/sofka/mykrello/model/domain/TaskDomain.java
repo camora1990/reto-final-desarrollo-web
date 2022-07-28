@@ -22,8 +22,9 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Entity
+@Data
 @Table(name = "krl_task")
 @JsonIgnoreProperties(value = {"logs"}, allowGetters = true, allowSetters = false)
 public class TaskDomain implements Serializable {
@@ -70,6 +71,5 @@ public class TaskDomain implements Serializable {
     @JsonBackReference(value = "column-tasks")
     @ManyToOne(fetch = FetchType.EAGER)
     private ColumnDomain columnDomain;
-
 
 }
