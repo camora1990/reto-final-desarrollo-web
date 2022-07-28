@@ -3,6 +3,7 @@ package org.sofka.mykrello.model.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +21,7 @@ import java.time.Instant;
 @Data
 @Entity
 @Table(name = "krl_log")
-@JsonIgnoreProperties(value = {"task"},allowSetters = false,allowGetters = true)
+@JsonIgnoreProperties(value = {"task"}, allowSetters = false, allowGetters = true)
 public class LogDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,12 +34,12 @@ public class LogDomain implements Serializable {
     @Column(name = "tsk_id_task")
     private Integer taskId;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false)
     @JoinColumn(name = "clm_id_previous", nullable = false, updatable = false)
     @JsonBackReference(value = "logPrevious")
     private ColumnDomain previous;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false)
     @JoinColumn(name = "clm_id_current", nullable = false, updatable = false)
     @JsonBackReference(value = "logCurrent")
     private ColumnDomain current;
@@ -46,9 +47,11 @@ public class LogDomain implements Serializable {
     @Column(name = "log_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+
     @JoinColumn(name = "tsk_id_task", insertable = false, updatable = false)
     @JsonBackReference(value = "log-task")
     @ManyToOne(fetch = FetchType.LAZY)
+    @Transient
     private TaskDomain task;
 
     public LogDomain(Integer taskId, ColumnDomain previous, ColumnDomain current) {

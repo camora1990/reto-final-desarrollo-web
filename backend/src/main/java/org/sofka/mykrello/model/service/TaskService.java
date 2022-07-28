@@ -39,6 +39,7 @@ public class TaskService implements TaskServiceInterface {
     @Override
     @Transactional(readOnly = false)
     public TaskDomain create(TaskDomain task) {
+
         var newTask = taskRepository.save(task);
         var colum = columnRepository.findById(task.getColumn()).orElse(null);
         var log = new LogDomain(newTask.getId(), colum, colum);
