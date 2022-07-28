@@ -19,4 +19,10 @@ public class MyResponseUtility {
         message = "Success";
         data = null;
     }
+
+    public void newResponse (Boolean error, String message, Object data){
+        this.data = data;
+        this.error = error;
+        this.message = message;
+    }
 }
