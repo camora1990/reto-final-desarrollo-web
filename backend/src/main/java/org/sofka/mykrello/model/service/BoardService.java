@@ -1,27 +1,28 @@
 package org.sofka.mykrello.model.service;
 
-import java.util.List;
-
+import lombok.AllArgsConstructor;
 import org.sofka.mykrello.model.domain.BoardDomain;
 import org.sofka.mykrello.model.domain.ColumnForBoardDomain;
 import org.sofka.mykrello.model.repository.BoardRepository;
 import org.sofka.mykrello.model.repository.ColumnForBoardRepository;
 import org.sofka.mykrello.model.repository.ColumnRepository;
 import org.sofka.mykrello.model.service.interfaces.BoardServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class BoardService implements BoardServiceInterface {
 
-    @Autowired
+
     private BoardRepository boardRepository;
 
-    @Autowired
+
     private ColumnRepository columnRepository;
 
-    @Autowired
+
     private ColumnForBoardRepository columnForBoardRepository;
 
     @Override
@@ -34,7 +35,7 @@ public class BoardService implements BoardServiceInterface {
     @Transactional(readOnly = true)
     public BoardDomain findById(Integer id) {
         var board = boardRepository.findById(id);
-        return board.isPresent() ? board.get() : null;
+        return board.orElse(null);
     }
 
     @Override
@@ -68,9 +69,7 @@ public class BoardService implements BoardServiceInterface {
             var board = optionalBoard.get();
             var columnsForBoard = board.getColumnsForBoard();
             if (!columnsForBoard.isEmpty()) {
-                columnsForBoard.forEach((column) -> {
-                    columnForBoardRepository.delete(column);
-                });
+                columnForBoardRepository.deleteAll(columnsForBoard); //  refactorizado
             }
             boardRepository.delete(optionalBoard.get());
             return optionalBoard.get();
