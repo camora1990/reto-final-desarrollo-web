@@ -1,7 +1,7 @@
 package org.sofka.mykrello.model.domain;
 
-import java.io.Serializable;
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,10 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import lombok.Data;
+import java.io.Serializable;
+import java.time.Instant;
 
 @Data
 @Entity
@@ -46,6 +44,7 @@ public class ColumnForBoardDomain implements Serializable {
     @JoinColumn(name = "clm_id_column", nullable = false)
     @JsonBackReference(value = "columnForBoards")
     private ColumnDomain column;
+
 
     @Column(name = "cfb_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
