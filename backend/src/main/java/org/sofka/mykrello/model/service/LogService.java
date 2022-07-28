@@ -29,6 +29,7 @@ public class LogService implements LogServiceInterface {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void deleteAllByTaskId(Integer taskId) {
         logRepository.deleteByTask(taskId);
     }
