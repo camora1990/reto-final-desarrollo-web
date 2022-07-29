@@ -1,3 +1,5 @@
+import { PopUp } from "../../utilities/popUps.js";
+
 /**
  * Clase para crear el modal de creacion
  * @class
@@ -5,6 +7,13 @@
  */
 export class ModalFormBoard {
 
+  #newBoard
+  #boardController 
+
+  constructor(boardController) {
+    this.#newBoard = {}
+    this.#boardController = boardController;
+  }
   /**
    * Obtiene el modal para crear Board
    * @returns - Modal para la creacion del board
@@ -12,15 +21,15 @@ export class ModalFormBoard {
   get modalForm() {
     const modal = `<div
         class="modal fade"
-        id="exampleModal"
+        id="boardNewModal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="boardNewModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog">
           <div class="modal-content card-custom text-light">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Crear tablero</h5>
+              <h5 class="modal-title" id="boardNewModalLabel">Crear tablero</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -34,12 +43,12 @@ export class ModalFormBoard {
                   <textarea
                     class="form-control bg-transparent"
                     placeholder="Leave a comment here"
-                    id="floatingTextarea2"
+                    id="floatingNameBoard"
                     style="height: 100px"
                     name="name"
                     required
                   ></textarea>
-                  <label for="floatingTextarea2">Nombre del tablero</label>
+                  <label for="floatingNameBoard">Nombre del tablero</label>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success">
@@ -54,6 +63,24 @@ export class ModalFormBoard {
   `;
     const frangment = document.createElement("template");
     frangment.innerHTML = modal;
+    frangment.content.getElementById("form").addEventListener("submit",this.#submitForm())
     return frangment.content;
   }
+
+  #submitForm(){return event => {
+    const input = document.getElementById("floatingNameBoard")
+    const {name, value} = input
+    this.#newBoard = {...this.#newBoard, [name]:value}
+    const message = "Estas segura de agregar este board"
+    PopUp.confirmationPopUp(message).then(async(result) => {
+      try {
+        const board = await this.#boardController.createBoard(this.#newBoard);
+        new BoardComponent();
+      } catch (error) {
+        
+      }
+    })
+  }
+}
+
 }
