@@ -44,3 +44,25 @@ body {
   border-radius: 5px;
   box-shadow: 0 5px 10px 0 #000;
 }
+
+.section-details{
+  min-height: 100px;
+}
+
+.container-task{
+
+}
+
+.custom-btn{
+  max-width: 95% !important;
+  background-color: #000;
+  background-image: linear-gradient(315deg, #2b2a2a, #1b1b1b 74%);
+}
+
+.card-task{
+  background-color: #000;
+  background-image: linear-gradient(315deg, #2b2a2a, #1b1b1b 74%);
+  border-radius: 5px;
+  max-width: 95% !important;
+  margin: 0 auto;
+}
