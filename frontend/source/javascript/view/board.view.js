@@ -1,4 +1,4 @@
-import { BoardModel } from "../model/board.model.js";
+
 import { utilities } from "../utilities/utilities.js";
 import { BoardComponent } from "./components/boardComponent.js";
 import { ModalFormBoard } from "./components/modalFormComponent.js";
