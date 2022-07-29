@@ -96,7 +96,10 @@ export class BoardComponent {
       });
     };
   }
-
+  /**
+   * Evento click agregado en el boton de editar de cada tablero
+   * @returns - Evento de para editar un board
+   */
   #eventEditBoard(){
     return(event)=>{
       document.getElementById("boardModalLabel").innerText = "Editar tablero";

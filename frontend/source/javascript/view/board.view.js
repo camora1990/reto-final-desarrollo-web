@@ -25,6 +25,9 @@ export class BoardView {
     this.#buttonCreate();
   }
 
+  /**
+   * Metodo para crear el componente board
+   */
   #initialComponent() {
     this.#section = utilities.createComponent(
       "div",
@@ -76,6 +79,11 @@ export class BoardView {
   #createModal() {
     this.#body.append(this.#modalForm.modalForm);
   }
+
+  /**
+   * Evento de creacion para el board
+   * @returns evento para creacion del board
+   */
 
   #eventCreateBoard() {
     return (event) => {

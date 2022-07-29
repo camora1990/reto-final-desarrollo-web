@@ -1,4 +1,4 @@
 export class Config {
-    static KTRELLO_URL = "http://localhost:5000/api/v1";
+    static KTRELLO_URL = "http://localhost:8080/api/v1";
     
 }
