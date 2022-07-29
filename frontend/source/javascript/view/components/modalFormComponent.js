@@ -87,6 +87,9 @@ export class ModalFormBoard {
     };
   }
 
+ /**
+  * Metodo para crear un board
+  */
   #createBoard() {
     const input = document.getElementById("floatingNameBoard");
     const { name, value } = input;
@@ -107,6 +110,10 @@ export class ModalFormBoard {
     });
   }
 
+  /**
+   * @param {Board} board - 
+   * @param {Integer} idBoard - id del board
+   */
   #editBoard(board, idBoard) {
     const message = "Estas seguro de editar este board";
     PopUp.confirmationPopUp(message).then(async (result) => {

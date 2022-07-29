@@ -13,7 +13,7 @@
      * @param {String} name - nombre de la tiqueta
      * @param {String} value - valor del campo
      * @returns {HTMLElement} Etiqueta HTML
-     * @author Camilo Morales Sanchez
+     * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
      */
     createComponent(tagName, classes = [], id = null, name = null, value = null) {
       const tag = document.createElement(tagName);
