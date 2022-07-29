@@ -26,7 +26,6 @@ export class BoardView {
   }
 
   #initialComponent() {
-    debugger;
     this.#section = utilities.createComponent(
       "div",
       ["shadow-sm", "p-3", "mb-5", "rounded"],
@@ -55,7 +54,7 @@ export class BoardView {
    */
 
   #buttonCreate() {
-    const button = `<button
+    const button = `<button id="create-board"
     class="btn btn-outline-success"
     data-bs-toggle="modal"
     data-bs-target="#boardModal"
@@ -65,7 +64,10 @@ export class BoardView {
   </button>`;
     const frangment = document.createElement("template");
     frangment.innerHTML = button;
-    this.#container.insertBefore(frangment.content,this.#section);
+    frangment.content
+      .getElementById("create-board")
+      .addEventListener("click", this.#eventCreateBoard());
+    this.#container.insertBefore(frangment.content, this.#section);
   }
 
   /**
@@ -73,5 +75,13 @@ export class BoardView {
    */
   #createModal() {
     this.#body.append(this.#modalForm.modalForm);
+  }
+
+  #eventCreateBoard() {
+    return (event) => {
+      document.getElementById("boardModalLabel").innerText = "Crear tablero";
+      document.getElementById("submit-button").textContent = "Crear tablero";
+      document.getElementById("floatingNameBoard").value = "";
+    };
   }
 }

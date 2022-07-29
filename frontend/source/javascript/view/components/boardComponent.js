@@ -39,7 +39,7 @@ export class BoardComponent {
              <span class="text-muted">${createdat}</span>
             </p>
             <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-success bg-dark">Ver mas</a>
+              <a href="boardDetails.html?board=${this.#board.id}" class="btn btn-outline-success bg-dark">Ver mas</a>
               <div>
                 <button id="delete-board" class="btn btn-danger">
                   <i class="fa-solid fa-trash-can"></i>
@@ -59,7 +59,10 @@ export class BoardComponent {
     fragnmet.innerHTML = boardComponente;
     fragnmet.content
       .getElementById("delete-board")
-      .addEventListener("click", this.#deleteBoard());
+      .addEventListener("click", this.#eventDeleteBoard());
+      fragnmet.content
+      .getElementById("edit-board")
+      .addEventListener("click", this.#eventEditBoard());
     return fragnmet.content;
   }
 
@@ -74,7 +77,7 @@ export class BoardComponent {
    * Evento click agregado en el boton de eliminacion de cada tablero
    * @returns - Evento de eliminacion del board
    */
-  #deleteBoard() {
+  #eventDeleteBoard() {
     return (event) => {
       const message = `¿Estás seguro de eliminar ${this.#board.name}?`;
       const text = "¡No podrás revertir esto!";
@@ -92,5 +95,15 @@ export class BoardComponent {
         }
       });
     };
+  }
+
+  #eventEditBoard(){
+    return(event)=>{
+      document.getElementById("boardModalLabel").innerText = "Editar tablero";
+      document.getElementById("submit-button").textContent = "Editar tablero";
+      document.getElementById("floatingNameBoard").value = this.#board.name;
+      document.getElementById("form").setAttribute("data-edit",true)
+      document.getElementById("form").setAttribute("data-idBoard",this.#board.id)
+    }
   }
 }

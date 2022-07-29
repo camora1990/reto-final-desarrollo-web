@@ -46,6 +46,14 @@ class BoardController {
    
   }
 
+  async editBoard(board,idBoard){
+    try {
+      return await this.#boardservice.editBoar(board,idBoard);
+    } catch (error) {
+      PopUp.errorPopUp(error.response?.message||error.message);
+    }
+  }
+
 }
 
 const boardController = new BoardController();

@@ -29,7 +29,7 @@ export class ModalFormBoard {
         <div class="modal-dialog">
           <div class="modal-content card-custom text-light">
             <div class="modal-header">
-              <h5 class="modal-title" id="boardModalLabel">Crear tablero</h5>
+              <h5 class="modal-title" id="boardModalLabel"></h5>
               <button
                 type="button"
                 class="btn-close"
@@ -51,8 +51,7 @@ export class ModalFormBoard {
                   <label for="floatingNameBoard">Nombre del tablero</label>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-success">
-                    Crear tablero
+                  <button id="submit-button" type="submit" class="btn btn-success">
                   </button>
                 </div>
               </form>
@@ -75,26 +74,53 @@ export class ModalFormBoard {
    */
   #submitFormBoard() {
     return (event) => {
-      debugger;
       event.preventDefault();
-      console.log(event);
-      const input = document.getElementById("floatingNameBoard");
-      const { name, value } = input;
-      this.#newBoard = { ...this.#newBoard, [name]: value };
-      const message = "Estas segura de agregar este board";
-      PopUp.confirmationPopUp(message).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-            await this.#boardController.createBoard(this.#newBoard);
-            PopUp.messageSuccess("Tablero creado con exito");
-            setTimeout(() => {
-              location.reload();
-            }, 1500);
-          } catch (error) {
-            PopUp.error(error.message);
-          }
-        }
-      });
+      const isEdit = (event.target.dataset.edit);
+      if (isEdit == "true") {
+        const boardEdit = { [event.target[0].name]: event.target[0].value };
+        const idBoard = event.target.dataset.idboard;
+        this.#editBoard(boardEdit, idBoard);
+        event.target.dataset.edit="false"
+        return;
+      }
+      this.#createBoard();
     };
+  }
+
+  #createBoard() {
+    const input = document.getElementById("floatingNameBoard");
+    const { name, value } = input;
+    this.#newBoard = { ...this.#newBoard, [name]: value };
+    const message = "Estas seguro de agregar este board";
+    PopUp.confirmationPopUp(message).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await this.#boardController.createBoard(this.#newBoard);
+          PopUp.messageSuccess("Tablero creado con exito");
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        } catch (error) {
+          PopUp.error(error.message);
+        }
+      }
+    });
+  }
+
+  #editBoard(board, idBoard) {
+    const message = "Estas seguro de editar este board";
+    PopUp.confirmationPopUp(message).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await this.#boardController.editBoard(board,idBoard);
+          PopUp.messageSuccess("Tablero actualizado con exito");
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        } catch (error) {
+          PopUp.error(error.message);
+        }
+      }
+    });
   }
 }

@@ -41,4 +41,9 @@ export default class BoardServices {
     const {id, name, createdAt, updatedAt} = responseData.data;
     return new BoardModel(id, name, createdAt, updatedAt);
   }
+
+  async editBoar(board,id){
+    const {data} = await axios.put(`${Config.KTRELLO_URL}/board/${id}`,board)
+    return data.data
+  }
 }
