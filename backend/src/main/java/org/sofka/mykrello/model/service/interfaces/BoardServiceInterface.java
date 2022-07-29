@@ -3,6 +3,7 @@ package org.sofka.mykrello.model.service.interfaces;
 import java.util.List;
 
 import org.sofka.mykrello.model.domain.BoardDomain;
+import org.sofka.mykrello.model.domain.dto.BoardDTO;
 
 /**
  * Repositorio del dominio BoardDomain
@@ -30,7 +31,7 @@ public interface BoardServiceInterface {
      * @author Julian Lasso <julian.lasso@sofka.com.co>
      * @since 0.0.1 2022-07-26
      */
-    public BoardDomain findById(Integer id);
+    public BoardDTO findById(Integer id);
 
     /**
      * Crea un nuevo tablero

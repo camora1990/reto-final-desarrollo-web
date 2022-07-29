@@ -27,7 +27,7 @@ public class MyResponseUtility {
     }
 
     public void newResponse (Boolean error, String message){
-        this.data = data;
+        this.data = null;
         this.error = error;
         this.message = message;
     }

@@ -118,7 +118,7 @@ public class TaskService implements TaskServiceInterface {
         var newColumn = columnRepository.findById(task.getColumn()).orElse(null);
         if(newColumn == null) return null;                                                              //Veirica si la columna a cambiar existe
 
-        var log = new LogDomain(id, verifyTask.getColumnDomain().getId(), newColumn.getId());
+        var log = new LogDomain(id, verifyTask.getColumn(), newColumn.getId());
         verifyTask.setColumn(newColumn.getId());
 
         logService.create(log);                                                                          //Crea el log del cambio

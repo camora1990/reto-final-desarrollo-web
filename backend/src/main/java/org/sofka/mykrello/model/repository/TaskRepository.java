@@ -15,6 +15,7 @@ public interface TaskRepository extends JpaRepository<TaskDomain, Integer> {
      */
     List<TaskDomain> findAllByBoard(Integer idBoard);
 
+
     /**
      * Metodo personalizado para obtener el tablero de una columna especifica
      * @param idColumn - id de la columna

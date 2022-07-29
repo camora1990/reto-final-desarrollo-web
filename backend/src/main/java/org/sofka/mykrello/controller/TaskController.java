@@ -107,27 +107,6 @@ public class TaskController {
     }
 
     /**
-     * Endpoint para obtener las tareas por tablero y por columna
-     *
-     * @param idBoartd - id del tablero
-     * @param idColum  -id de la columna
-     * @return Respuesta personalizada
-     * @author Camilo Morales S - juan Camilo Castañeada
-     */
-    @GetMapping("/{idBoard}/{idColum}")
-    public ResponseEntity<MyResponseUtility> getTaskByColumn(@PathVariable("idBoard") Integer idBoartd, @PathVariable("idColum") Integer idColum) {
-        try {
-            var taks = taskService.findAllByColumnAndAndBoard(idColum, idBoartd);
-            response.newResponse(false, "list tasks by colum and board", taks);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            response.newResponse(true, e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
-    /**
      * Endpoint para creacion de tarea
      *
      * @param task - Objeto de tipo tarea

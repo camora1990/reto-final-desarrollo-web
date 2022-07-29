@@ -2,6 +2,8 @@ package org.sofka.mykrello.model.service;
 
 import org.sofka.mykrello.model.domain.BoardDomain;
 import org.sofka.mykrello.model.domain.ColumnForBoardDomain;
+import org.sofka.mykrello.model.domain.dto.BoardDTO;
+import org.sofka.mykrello.model.domain.dto.ColumnDTO;
 import org.sofka.mykrello.model.repository.BoardRepository;
 import org.sofka.mykrello.model.repository.ColumnForBoardRepository;
 import org.sofka.mykrello.model.repository.ColumnRepository;
@@ -63,9 +65,18 @@ public class BoardService implements BoardServiceInterface {
 
     @Override
     @Transactional(readOnly = true)
-    public BoardDomain findById(Integer id) {
-        var board = boardRepository.findById(id);
-        return board.orElse(null);
+    public BoardDTO findById(Integer id) {
+        var board = boardRepository.findById(id).orElse(null);
+        if (board == null) return null;
+        var colums = columnRepository.findAll();
+        var boardDTO = new BoardDTO(board.getId(), board.getName(), board.getUpdatedAt(),board.getCreatedAt());
+        colums.forEach(colum->{
+            var taskColum = taskRepository.findAllByColumnAndAndBoard(colum.getId(), boardDTO.getId());
+            boardDTO.getColumns().add(new ColumnDTO(colum.getId(),colum.getName(),colum.getCreatedAt(),colum.getUpdatedAt(),taskColum));
+        });
+
+
+        return boardDTO;
     }
 
     @Override
@@ -87,6 +98,8 @@ public class BoardService implements BoardServiceInterface {
     @Override
     @Transactional
     public BoardDomain update(Integer id, BoardDomain board) {
+        var verifyBoard = boardRepository.findById(id).orElse(null);
+        if (verifyBoard == null) return null;
         board.setId(id);
         return boardRepository.save(board);
     }

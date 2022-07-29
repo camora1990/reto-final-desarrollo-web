@@ -4,6 +4,7 @@ import org.sofka.mykrello.model.domain.BoardDomain;
 import org.sofka.mykrello.model.service.BoardService;
 import org.sofka.mykrello.utilities.MyResponseUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,7 +50,8 @@ public class BoardController {
      */
     @GetMapping(path = "/")
     public ResponseEntity<MyResponseUtility> index() {
-        response.data = boardService.getAll();
+        var data = boardService.getAll();
+        response.newResponse(false,"List boards",data );
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -61,7 +63,8 @@ public class BoardController {
      */
     @GetMapping(path = "/{id}")
     public ResponseEntity<MyResponseUtility> getBoardById(@PathVariable(value = "id") Integer id) {
-        response.data = boardService.findById(id);
+        var data = boardService.findById(id);
+        response.newResponse(false,"Board",data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -73,8 +76,18 @@ public class BoardController {
      */
     @PostMapping(path = "/")
     public ResponseEntity<MyResponseUtility> create(@RequestBody BoardDomain board) {
-        response.data = boardService.create(board);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        try {
+            var data = boardService.create(board);
+            response.newResponse(false,"Board created",data);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }catch (DataAccessException e ){
+            response.newResponse(true, e.getCause().getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }catch (RuntimeException e ){
+            response.newResponse(true, e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     /**
@@ -87,8 +100,23 @@ public class BoardController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<MyResponseUtility> put(@PathVariable(value = "id") Integer id,
                                                  @RequestBody BoardDomain board) {
-        response.data = boardService.update(id, board);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+
+        try {
+            var data = boardService.update(id, board);
+            if (data == null) {
+                response.newResponse(true, "Board not found");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            response.newResponse(false, "Board updated successfully",data);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (DataAccessException e){
+            response.newResponse(true, e.getCause().getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }catch (RuntimeException e ){
+            response.newResponse(true, e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     /**
@@ -99,8 +127,22 @@ public class BoardController {
      */
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<MyResponseUtility> delete(@PathVariable(value = "id") Integer id) {
-        response.data = boardService.delete(id);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+       try {
+           var data = boardService.delete(id);
+           if (data == null) {
+               response.newResponse(true, "Board not found");
+               return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+           }
+           return new ResponseEntity<>(response, HttpStatus.OK);
+
+       }catch (DataAccessException e){
+           response.newResponse(true, e.getCause().getMessage());
+           return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+       }catch (RuntimeException e ){
+           response.newResponse(true, e.getMessage());
+           return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+
     }
 
 

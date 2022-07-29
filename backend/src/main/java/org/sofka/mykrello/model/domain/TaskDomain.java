@@ -66,10 +66,10 @@ public class TaskDomain implements Serializable {
     @OneToMany(mappedBy = "task",fetch = FetchType.EAGER, targetEntity = LogDomain.class)
     private List<LogDomain> logs = new ArrayList<>();
 
-    @JoinColumn(name = "clm_id_column",insertable = false,updatable = false)
-    @JsonIgnore
-    @JsonBackReference(value = "column-tasks")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private ColumnDomain columnDomain;
+//    @JoinColumn(name = "clm_id_column",insertable = false,updatable = false)
+//    @JsonIgnore
+//    @JsonBackReference(value = "column-tasks")
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private ColumnDomain columnDomain;
 
 }
