@@ -38,7 +38,7 @@ export default class BoardServices {
    */
   async createBoard(data){
     const {data:responseData} = await axios.post(`${Config.KTRELLO_URL}/board/`, data)
-    const {id, name, createdAt, updatedAt} = responseData;
+    const {id, name, createdAt, updatedAt} = responseData.data;
     return new BoardModel(id, name, createdAt, updatedAt);
   }
 }

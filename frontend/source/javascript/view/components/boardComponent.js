@@ -44,7 +44,9 @@ export class BoardComponent {
                 <button id="delete-board" class="btn btn-danger">
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
-                <button id="edit-board" class="btn btn-warning">
+                <button   data-bs-toggle="modal"
+                data-bs-target="#boardModal"
+                data-bs-whatever="@mdo" id="edit-board" class="btn btn-warning">
                   <i class="fa-solid fa-file-pen"></i>
                 </button>
               </div>
