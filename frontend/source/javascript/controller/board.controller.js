@@ -36,6 +36,16 @@ class BoardController {
       PopUp.errorPopUp(error.response?.message||error.message);
     }
   }
+
+  async createBoard(data) {
+    try {
+      return await this.#boardservice.createBoard(data);
+    } catch (error) {
+      PopUp.errorPopUp(error.response?.message||error.message);
+    }
+   
+  }
+
 }
 
 const boardController = new BoardController();
