@@ -30,4 +30,15 @@ export default class BoardServices {
   deleteBoard(boardId) {
     return axios.delete(`${Config.KTRELLO_URL}/board/${boardId}`);
   }
+
+  /**
+   * 
+   * @param {Object} data  - Objeto para crear el board
+   * @returns - Retorna la promesa de la creacion del board 
+   */
+  async createBoard(data){
+    const {data:responseData} = await axios.post(`${Config.KTRELLO_URL}/board/`, data)
+    const {id, name, createdAt, updatedAt} = responseData;
+    return new BoardModel(id, name, createdAt, updatedAt);
+  }
 }
