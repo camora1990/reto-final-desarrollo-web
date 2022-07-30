@@ -23,7 +23,6 @@ class IndexController {
    */
   async init() {
     try {
-      this.#boardservice.getBoardById(49)
       const boards = await this.#boardservice.getBoards();     // Obtienen todos los tableros
       this.#boardView.init(boards);   
                                // Le pasa los tableros obtenidos a la vista 
