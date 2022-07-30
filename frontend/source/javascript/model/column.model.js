@@ -39,7 +39,7 @@ export class ColumnModel {
   get updatedAt() {
     return this.#updatedAt;
   }
-  get task() {
+  get tasks() {
     return this.#tasks;
   }
 }
