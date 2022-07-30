@@ -111,7 +111,8 @@ export class ModalFormBoard {
   }
 
   /**
-   * @param {Board} board - 
+   * Metodo para editar un board
+   * @param {Board} board -  board a editar
    * @param {Integer} idBoard - id del board
    */
   #editBoard(board, idBoard) {

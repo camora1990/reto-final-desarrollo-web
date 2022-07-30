@@ -74,15 +74,15 @@ export class BoardView {
   }
 
   /**
-   * Metodo para crear el modal de formulario
+   * Agrega el modal al DOM
    */
   #createModal() {
     this.#body.append(this.#modalForm.modalForm);
   }
 
   /**
-   * Evento de creacion para el board
-   * @returns evento para creacion del board
+   * Evento de para crear un board
+   * @returns - evento para la creacion de un board
    */
 
   #eventCreateBoard() {

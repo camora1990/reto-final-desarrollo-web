@@ -19,12 +19,12 @@ class BoardController {
     this.#boardView = new BoardView(this); //se crea una instacia de la vista
   }
   /**
-   * Creatodos los tableros disponibles
+   * Crea todos los tableros disponibles
    */
   async init() {
     try {
       const boards = await this.#boardservice.getBoards();     // Obtienen todos los tableros
-      this.#boardView.init(boards);
+      this.#boardView.init(boards);                            // Le pasa los tableros obtenidos a la vista 
     } catch (error) {
       PopUp.errorPopUp(error.response?.message||error.message);
     }

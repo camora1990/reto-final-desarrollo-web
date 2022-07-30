@@ -23,7 +23,7 @@ export default class BoardServices {
   }
 
   /**
-   * 
+   * Metodo para eliminar un tablero por el id
    * @param {number} boardId - Id del tablero a eliminar
    * @returns - promesa con mensaje de eliminacion
    */
@@ -32,9 +32,9 @@ export default class BoardServices {
   }
 
   /**
-   * 
-   * @param {Object} data  - Objeto para crear el board
-   * @returns - Retorna la promesa de la creacion del board 
+   * Metodo para crear un tablero
+   * @param {Object} data  - Objeto pasado para la cracion del tablero
+   * @returns - promesa para la creacion del tablero 
    */
   async createBoard(data){
     const {data:responseData} = await axios.post(`${Config.KTRELLO_URL}/board/`, data)
@@ -43,9 +43,10 @@ export default class BoardServices {
   }
 
   /**
-   * @param {Integer} board -
-   * @param {Integer} id -
-   * @returns - Objeto con los datos actualizados
+   * Metodo para editar un tablero
+   * @param {Integer} board - tablero a editar 
+   * @param {Integer} id - id del tablero
+   * @returns - promesa para actualizar el tablero
    */
   async editBoar(board,id){
     const {data} = await axios.put(`${Config.KTRELLO_URL}/board/${id}`,board)

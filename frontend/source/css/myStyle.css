@@ -1,41 +1,29 @@
+* {
+  transition: all 0.8s;
+}
+
 #section {
   width: 100%;
-  border: 1px solid #c3c3c3;
+  border: 2.5px solid;
+  background: #0c0c0cb8;
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 5%), 5px 5px 15px rgb(0 0 0 / 50%) !important;
   border-radius: 4px;
   margin-top: 16px;
   padding: 8px;
 }
 
 body {
-  background-image: linear-gradient(
-      45deg,
-      rgba(86, 86, 86, 0.04) 0%,
-      rgba(86, 86, 86, 0.04) 50%,
-      rgba(169, 169, 169, 0.04) 50%,
-      rgba(169, 169, 169, 0.04) 71%,
-      rgba(251, 251, 251, 0.04) 71%,
-      rgba(251, 251, 251, 0.04) 100%
-    ),
-    linear-gradient(
-      45deg,
-      rgba(86, 86, 86, 0.04) 0%,
-      rgba(86, 86, 86, 0.04) 56%,
-      rgba(169, 169, 169, 0.04) 56%,
-      rgba(169, 169, 169, 0.04) 67%,
-      rgba(251, 251, 251, 0.04) 67%,
-      rgba(251, 251, 251, 0.04) 100%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(86, 86, 86, 0.04) 0%,
-      rgba(86, 86, 86, 0.04) 4%,
-      rgba(169, 169, 169, 0.04) 4%,
-      rgba(169, 169, 169, 0.04) 75%,
-      rgba(251, 251, 251, 0.04) 75%,
-      rgba(251, 251, 251, 0.04) 100%
-    ),
-    linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
-    background-size: cover;
+  background-image: url(../images/bgc.jpg);
+  background-size: cover;
+}
+
+#text {
+  color: #f8f9fa !important;
+  margin-bottom: 50px;
+}
+
+.colum {
+  color: #979797
 }
 
 .card-custom {
@@ -45,24 +33,63 @@ body {
   box-shadow: 0 5px 10px 0 #000;
 }
 
-.section-details{
+.section-details {
   min-height: 100px;
 }
 
-.container-task{
-
+.container-task {
+  background: #0c0c0cbc;
+  box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.05),
+    inset 5px 5px 15px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border: 1px solid;
 }
 
-.custom-btn{
+.container-task:hover {
+  transform: scale(1.03);
+}
+
+.custom-btn {
   max-width: 95% !important;
   background-color: #000;
   background-image: linear-gradient(315deg, #2b2a2a, #1b1b1b 74%);
 }
 
-.card-task{
+.card-task {
   background-color: #000;
   background-image: linear-gradient(315deg, #2b2a2a, #1b1b1b 74%);
   border-radius: 5px;
   max-width: 95% !important;
   margin: 0 auto;
+}
+
+.fa-check:before {
+  content: "\f00c";
+  color: green;
+}
+
+.fa-spinner:before {
+  content: "\f110";
+  color: turquoise;
+  font-size: 20px;
+}
+
+.fa-hourglass-1:before,
+.fa-hourglass-start:before {
+  content: "\f251";
+  font-size: 18px;
+  color: rgb(131, 83, 0)
+}
+.modal-header .btn-close {
+  padding: 0.5rem 0.5rem;
+  margin: -0.5rem -0.5rem -0.5rem auto;
+  color: white;
+  background-color: gray;
+}
+@media (max-width: 768px) {
+  .row{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    gap: 10px;
+  }
 }

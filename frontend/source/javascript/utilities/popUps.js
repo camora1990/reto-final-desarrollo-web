@@ -30,7 +30,7 @@ export class PopUp {
   }
 
   /**
-   * 
+   * Muestra un modal con el mensaje de exito
    * @param {string} message - Menjade de confirmacion
    * @returns - Modal de opracion exitosa
    */
@@ -47,7 +47,7 @@ export class PopUp {
   }
 
   /**
-   * 
+   * Muestra un modal con el mensaje de error
    * @param {string} message -Mensaje de eror
    * @returns - Modal con el error
    */
