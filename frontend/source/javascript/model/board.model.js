@@ -9,18 +9,20 @@ export class BoardModel {
   #id;
   #createdAt;
   #updatedAt;
+  #columns;
   /**
    * Constructor para creacion de tableros
-   * @param {number} id 
-   * @param {string} name 
-   * @param {string} createdAt 
-   * @param {string} updatedAt 
+   * @param {number} id
+   * @param {string} name
+   * @param {string} createdAt
+   * @param {string} updatedAt
    */
-  constructor(id, name, createdAt, updatedAt) {
+  constructor(id, name, createdAt, updatedAt, columns = []) {
     this.#id = id;
     this.#name = name;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
+    this.#columns = columns;
   }
 
   get name() {
@@ -34,5 +36,12 @@ export class BoardModel {
   }
   get updatedAt() {
     return this.#updatedAt;
+  }
+  get columns() {
+    return this.#columns;
+  }
+
+  set columns(value) {
+    this.#columns = value;
   }
 }

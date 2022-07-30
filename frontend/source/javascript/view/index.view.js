@@ -8,7 +8,7 @@ import { ModalFormBoard } from "./components/modalFormComponent.js";
  * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
  */
 
-export class BoardView {
+export class IndexView {
   #body;
   #modalForm;
   #container;

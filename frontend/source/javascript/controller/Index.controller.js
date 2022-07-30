@@ -1,6 +1,6 @@
 import BoardServices from "../model/services/board.service.js";
 import { PopUp } from "../utilities/popUps.js";
-import { BoardView } from "../view/board.view.js";
+import { IndexView } from "../view/index.view.js";
 
 /**
  * Controlador de los tableros
@@ -8,7 +8,7 @@ import { BoardView } from "../view/board.view.js";
  * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
  */
 
-class BoardController {
+class IndexController {
   #boardservice;
   #boardView;
   /**
@@ -16,15 +16,17 @@ class BoardController {
    */
   constructor() {
     this.#boardservice = new BoardServices(); //se crea una instacia de los servicios
-    this.#boardView = new BoardView(this); //se crea una instacia de la vista
+    this.#boardView = new IndexView(this); //se crea una instacia de la vista
   }
   /**
    * Crea todos los tableros disponibles
    */
   async init() {
     try {
+      this.#boardservice.getBoardById(49)
       const boards = await this.#boardservice.getBoards();     // Obtienen todos los tableros
-      this.#boardView.init(boards);                            // Le pasa los tableros obtenidos a la vista 
+      this.#boardView.init(boards);   
+                               // Le pasa los tableros obtenidos a la vista 
     } catch (error) {
       PopUp.errorPopUp(error.response?.message||error.message);
     }
@@ -65,6 +67,6 @@ class BoardController {
   }
 }
 
-const boardController = new BoardController();
+const indexController = new IndexController();
 
-boardController.init();
+indexController.init();

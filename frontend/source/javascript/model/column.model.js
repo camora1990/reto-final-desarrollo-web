@@ -1,10 +1,24 @@
-export class Column {
+/**
+ * Modelo de los columnas
+ * @class
+ * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ */
+
+export class ColumnModel {
   #id;
   #name;
   #createdAt;
   #updatedAt;
   #tasks = [];
 
+  /**
+   * Constructor para la creacion de columnas
+   * @param {number} id 
+   * @param {string} name 
+   * @param {string} createdAt 
+   * @param {string} updatedAt 
+   * @param {Array} task 
+   */
   constructor(id, name, createdAt, updatedAt, task=[]) {
     this.#id = id;
     this.#name = name;
