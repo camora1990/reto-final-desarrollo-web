@@ -63,7 +63,7 @@ export default class BoardServices {
 
   /**
    * Metodo para obtener el board
-   * @param {number} idBoard 
+   * @param {number} idBoard
    * @returns - retorna el board
    */
 
