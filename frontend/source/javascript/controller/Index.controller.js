@@ -27,7 +27,7 @@ class IndexController {
       this.#boardView.init(boards);   
                                // Le pasa los tableros obtenidos a la vista 
     } catch (error) {
-      PopUp.errorPopUp(error.response?.message||error.message);
+      PopUp.errorPopUp(error.response?.data.message||error.message);
     }
   }
 

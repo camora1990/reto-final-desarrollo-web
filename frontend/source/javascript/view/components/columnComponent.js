@@ -1,5 +1,10 @@
 import { taskComponent } from "./taskComponent.js";
 
+/**
+ * Clase para crear el componente columna
+ * @class
+ * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ */
 export class ColumnComponent {
   #component;
   #parentNode;
@@ -13,9 +18,12 @@ export class ColumnComponent {
     ];
     this.#createColumn(columns);
   }
+  /**
+   * Metodo para crear los nodos de tipo columna en el DOM
+   * @param {Array} columns - Array de columnas de tipo ColumnModel
+   */
 
   #createColumn(columns) {
-
     columns.forEach((column, i) => {
       const columFragmen = document.createElement("template");
       columFragmen.innerHTML = `<div class="col col-lg-4 text-center">

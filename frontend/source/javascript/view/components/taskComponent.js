@@ -1,14 +1,24 @@
+import taskController from "../../controller/task.controller.js";
+/**
+ * Clase para crear las tareas
+ * @class
+ * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ */
 export class taskComponent {
-  #component;
   #parenNode;
   #task;
+  #taskController;
 
   constructor(task, parentNode) {
     this.#parenNode = parentNode;
     this.#task = task;
     this.#createTask(task);
+    this.#taskController = taskController;
   }
-
+  /**
+   * Crea la card donde ira la tarea
+   * @param {TaskModel} task - Parametro de tipo task model
+   */
   #createTask(task) {
     const createdat = moment(task.createdAt).format("l");
     const taskComponent = ` <div class="card card-task">
@@ -36,6 +46,21 @@ export class taskComponent {
             </div>`;
     const fragment = document.createElement("template");
     fragment.innerHTML = taskComponent;
+    fragment.content
+      .getElementById("delete-task")
+      .addEventListener("click", this.#deleteTask());
     this.#parenNode.append(fragment.content);
+  }
+  /**
+   * Metodo que retorna el evento para eliminar una tarea
+   * @returns - evento para eliminar una tarea
+   */
+  #deleteTask() {
+    return (event) => {
+      this.#taskController.deleteTask(this.#task.id);
+      setTimeout(() => {
+        location.reload();
+      }, 1500);
+    };
   }
 }
