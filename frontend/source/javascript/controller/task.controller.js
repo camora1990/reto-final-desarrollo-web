@@ -57,7 +57,7 @@ export class TaskController {
     }
   }
 
-  async edittask(idTask, task){
+  async editTask(idTask, task){
     try {
       const { data } = await this.#taskService.editTask(idTask, task);
       const message = `La tarea ${data.name} editado con exito`

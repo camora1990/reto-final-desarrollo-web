@@ -96,21 +96,23 @@ export class ModaTaskComponent {
       const isEdit = event.target.dataset.edit;
 
       if (isEdit == "true") {
-        this.#EditTask();
+        const idTask = event.target.dataset.taskid;
+        this.#EditTask(idTask);
+        document.getElementById("taskModalLabel").innerText = "Crear task"
+        event.target.dataset.edit = "false"
       } else {
         this.#createTask();
       }
     };
   }
 
-  #EditTask() {
+  #EditTask(idTask) {
     const message = "Estas seguro de guardar la tarea";
     PopUp.confirmationPopUp(message).then((result) => {
       if (result.isConfirmed) {
-        taskController.edittask(this.#task);
+        taskController.editTask(idTask, this.#task);
       }
     });
-
   }
 
   #createTask() {
