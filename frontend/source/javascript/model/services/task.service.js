@@ -5,16 +5,18 @@ import { Config } from "../../config.mjs";
  * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
  */
 export class TaskService {
+  /**
+   * Metodo para eliminar una tarea
+   * @param {number} taskId - id de la tarea a eliminar
+   * @returns
+   */
+  async deleteTask(taskId) {
+    const { data } = await axios.delete(`${Config.KTRELLO_URL}/task/${taskId}`);
+    return data;
+  }
 
-
-    /**
-     * Metodo para eliminar una tarea
-     * @param {number} taskId - id de la tarea a eliminar
-     * @returns 
-     */
-    async deleteTask(taskId){
-        const {data}  =  await axios.delete(`${Config.KTRELLO_URL}/task/${taskId}`);
-        return data;
-    }
-
+  async createTask(task) {
+    const { data } = await axios.post(`${Config.KTRELLO_URL}/task/`, task);
+    return data;
+  }
 }
