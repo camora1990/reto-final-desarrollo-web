@@ -53,11 +53,16 @@ export class BoardComponent {
         </div>
       </div>
      `;
-    const fragnmet = document.createElement("template");
-    fragnmet.innerHTML = boardComponente;
+    const fragnmet = document.createElement("template");                             //Crea el template 
+  
+    fragnmet.innerHTML = boardComponente;                                            //Inyecta el template string al template
+    
+    /**
+     * Se agregan eventos a los componentes 
+     * */                                                             
     fragnmet.content
       .getElementById("delete-board")
-      .addEventListener("click", this.#eventDeleteBoard());
+      .addEventListener("click", this.#eventDeleteBoard());                
       fragnmet.content
       .getElementById("edit-board")
       .addEventListener("click", this.#eventEditBoard());

@@ -79,6 +79,10 @@ export class taskComponent {
             </div>`;
     const fragment = document.createElement("template");
     fragment.innerHTML = taskComponent;
+
+    /**
+     * Se agregan eventos a los componentes 
+     * */   
     fragment.content
       .getElementById("delete-task")
       .addEventListener("click", this.#deleteTask());
@@ -97,6 +101,9 @@ export class taskComponent {
       .getElementById("show-log")
       .addEventListener("click", this.#showLog());
 
+      /**
+     * Se agregan componente al DOM
+     * */   
     this.#parenNode.append(fragment.content);
   }
   /**

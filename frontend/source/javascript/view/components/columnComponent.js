@@ -6,7 +6,6 @@ import { taskComponent } from "./taskComponent.js";
  * @version 1.0.0
  */
 export class ColumnComponent {
-  #component;
   #parentNode;
   #icons;
   #boardId;
@@ -47,6 +46,9 @@ export class ColumnComponent {
         new taskComponent(task, parentNodeTask);
       });
 
+      /**
+     * Se agregan eventos a los componentes 
+     * */   
       columFragmen.content
         .getElementById("btn-new-task")
         .addEventListener("click", this.#eventcreateTask());

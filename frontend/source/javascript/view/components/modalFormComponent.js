@@ -61,6 +61,10 @@ export class ModalFormBoard {
   `;
     const frangment = document.createElement("template");
     frangment.innerHTML = modal;
+
+    /**
+     * Se agregan eventos a los componentes 
+     * */   
     frangment.content
       .getElementById("form")
       .addEventListener("submit", this.#submitFormBoard());

@@ -52,16 +52,22 @@ export class IndexView {
    * Metodo para crear el boton de crear nuevo board
    */
   #buttonCreate() {
-    const button = `<button id="create-board"
+    const button = `<div class="d-flex"> 
+    <h1 class="fw-bold text-light me-5">K-Trello</h1>
+    <button id="create-board"
     class="btn btn-outline-success"
     data-bs-toggle="modal"
     data-bs-target="#boardModal"
     data-bs-whatever="@mdo"
   >
     crear tablero <i class="fa-solid fa-circle-plus"></i>
-  </button>`;
+  </button>
+    </div>`;
     const frangment = document.createElement("template");
     frangment.innerHTML = button;
+    /**
+     * Se agregan eventos a los componentes 
+     * */   
     frangment.content
       .getElementById("create-board")
       .addEventListener("click", this.#eventCreateBoard());

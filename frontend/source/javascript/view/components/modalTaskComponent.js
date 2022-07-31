@@ -10,6 +10,10 @@ export class ModaTaskComponent {
   #parenNode;
   #task;
   #boardId;
+  /**
+   * Constrauctor con parametros para inicializar el modaltask
+   * @param {number} boardId 
+   */
   constructor(boardId) {
     this.#parenNode = document.querySelector("body");
     this.#boardId = boardId;
@@ -18,7 +22,7 @@ export class ModaTaskComponent {
     this.#createModalLog();
   }
   /**
-   * Metodo para crear el modal de tarea
+   * Metodo para crear el modal de tarea para edicion y creacion
    */
   #createmodalTask() {
     const modal = `<div
@@ -84,6 +88,10 @@ export class ModaTaskComponent {
   `;
     const frangment = document.createElement("template");
     frangment.innerHTML = modal;                                //Inyecta el modal al DOM
+    
+    /**
+     * Se agregan eventos a los componentes 
+     * */   
     frangment.content
       .getElementById("form-task")
       .addEventListener("submit", this.#submitForm());          //Evento submit para la creacion de tarea
