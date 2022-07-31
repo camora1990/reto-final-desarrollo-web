@@ -1,5 +1,4 @@
 import { PopUp } from "../../utilities/popUps.js";
-import { BoardComponent } from "./boardComponent.js";
 
 /**
  * Clase para crear el modal de creacion

@@ -31,7 +31,7 @@ export class BoardComponent {
 
   #createComponent() {
     const createdat = moment(this.#board.createdAt).format("l");
-    const boardComponente = `<div class="col-sm-4 mb-3">
+    const boardComponente = `<div class="col-12 col-md-6 col-lg-4 mb-3">
         <div class="card card-custom">
           <div class="card-body text-light">
             <h5 class="card-title">${this.#board.name}</h5>

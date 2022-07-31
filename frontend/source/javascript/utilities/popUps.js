@@ -13,7 +13,7 @@ export class PopUp {
    */
   static confirmationPopUp(
     message = "Estas seguro de realizar la operación ",
-    text = "Operación realizada con éxito"
+    text = "Operación no se podra revertir"
   ) {
     return Swal.fire({
       title: message,

@@ -11,11 +11,12 @@ export class BoardDetailsController {
   }
 
   async init() {
-    debugger;
+    ;
     const params = new URLSearchParams(window.location.search);
     const boardId = params.get("board");
     if (boardId) {
       try {
+        
         const board = await this.#boardService.getBoardById(boardId);
         this.#boardDetailsView.createViewBoardDetails(board);
       } catch (error) {
