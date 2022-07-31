@@ -1,4 +1,5 @@
 import taskController from "../../controller/task.controller.js";
+import { PopUp } from "../../utilities/popUps.js";
 /**
  * Clase para crear las tareas
  * @class
@@ -20,8 +21,10 @@ export class taskComponent {
    * @param {TaskModel} task - Parametro de tipo task model
    */
   #createTask(task) {
+    
     const createdat = moment(task.createdAt).format("l");
-    const taskComponent = ` <div class="card card-task">
+    
+    const taskComponent = ` <div class="card card-task mb-3">
             <div class="card-body text-light text-start">
             <p class="card-title">${task.name}</p>
             <p class="card-text">
@@ -31,8 +34,19 @@ export class taskComponent {
             <div class="d-flex justify-content-between">
                 <button
                 class="btn btn-outline-success bg-dark"
-                >Ver mas</button
+                >Log</button
                 >
+                <div class="arrows text-muted">${
+                  task.column > 1 ?
+                  '<i id="back" class="fa-solid fa-circle-arrow-left"></i>':""
+                }
+                Mover
+                ${
+                  task.column <3 ?
+                  '<i id="next" class="fa-solid fa-circle-arrow-right"></i>':""
+                }
+                
+                </div>
                 <div>
                 <button id="delete-task" class="btn btn-danger">
                   <i class="fa-solid fa-trash-can"></i>
@@ -57,10 +71,25 @@ export class taskComponent {
    */
   #deleteTask() {
     return (event) => {
-      this.#taskController.deleteTask(this.#task.id);
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      const message = `Estas seguro de eliminar la tarea ${this.#task.name}`;
+
+      PopUp.confirmationPopUp(message).then((response) => {
+        if (response.isConfirmed) {
+          this.#taskController.deleteTask(this.#task.id);
+        }
+      });
     };
+  }
+
+  #eventBackColumn(){
+    return(event)=>{
+
+    }
+  }
+
+  #eventNextColumn(){
+    return(event)=>{
+      
+    }
   }
 }
