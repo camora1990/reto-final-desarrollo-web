@@ -24,7 +24,7 @@ export class ModaTaskComponent {
         <div class="modal-dialog">
           <div class="modal-content card-custom text-light">
             <div class="modal-header">
-              <h5 class="modal-title" id="taskModalLabel"></h5>
+              <h5 class="modal-title" id="taskModalLabel">New task</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -79,11 +79,11 @@ export class ModaTaskComponent {
     frangment.innerHTML = modal;
     frangment.content
       .getElementById("form-task")
-      .addEventListener("submit", this.#eventSaveTask());
+      .addEventListener("submit", this.#submitForm());
     this.#parenNode.append(frangment.content);
   }
 
-  #eventSaveTask() {
+  #submitForm() {
     return (event) => {
       this.#task = {};
       event.preventDefault();
@@ -93,13 +93,33 @@ export class ModaTaskComponent {
         (this.#task.delivery = moment.utc(event.target[2].value).format());
       this.#task.column = event.target.dataset.columnid;
       this.#task.board = this.#boardId;
-      const message = "estas seguro de guardar la tarea";
-      PopUp.confirmationPopUp(message).then((result) => {
-        if (result.isConfirmed) {
-          taskController.createTask(this.#task);
-        }
-      });
+      const isEdit = event.target.dataset.edit;
+
+      if (isEdit == "true") {
+        this.#EditTask();
+      } else {
+        this.#createTask();
+      }
     };
+  }
+
+  #EditTask() {
+    const message = "Estas seguro de guardar la tarea";
+    PopUp.confirmationPopUp(message).then((result) => {
+      if (result.isConfirmed) {
+        taskController.edittask(this.#task);
+      }
+    });
+
+  }
+
+  #createTask() {
+    const message = "Estas seguro de guardar la tarea";
+    PopUp.confirmationPopUp(message).then((result) => {
+      if (result.isConfirmed) {
+        taskController.createTask(this.#task);
+      }
+    });
   }
 
   #createModalLog() {

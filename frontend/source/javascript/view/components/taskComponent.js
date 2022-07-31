@@ -63,7 +63,9 @@ export class taskComponent {
                 <button id="delete-task" class="btn btn-danger">
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
-                <button   id="edit-task" class="btn btn-warning">
+                <button data-bs-toggle="modal"
+                data-bs-target="#taskModal"
+                data-bs-whatever="@mdo"  id="edit-task" class="btn btn-warning">
                   <i class="fa-solid fa-file-pen"></i>
                 </button>
               </div>
@@ -75,6 +77,10 @@ export class taskComponent {
     fragment.content
       .getElementById("delete-task")
       .addEventListener("click", this.#deleteTask());
+
+    fragment.content
+      .getElementById("edit-task")
+      .addEventListener("click", this.#EventButtonEdit());
 
     const arrowBack = fragment.content.getElementById("back");
     arrowBack && arrowBack.addEventListener("click", this.#eventBackColumn());
@@ -142,6 +148,23 @@ export class taskComponent {
         `;
       });
       bodyModallog.innerHTML = `<ol>${list}</ol>`;
+    };
+  }
+
+  #EventButtonEdit() {
+    return (event) => {
+      const form = document.getElementById("form-task");
+      
+      form.setAttribute("data-edit", "true");
+      form.setAttribute("data-taskId", this.#task.id);
+      document.getElementById("floatingNameTask").value = this.#task.name;
+      document.getElementById("floatingDescriptionTask").value =
+        this.#task.description;
+      this.#task.delivery &&
+        (document.getElementById("floatingDeliveryTask").value = moment(
+          this.#task.delivery
+        ).format("l"));
+        document.getElementById("taskModalLabel").innerText = "Editar task"
     };
   }
 }

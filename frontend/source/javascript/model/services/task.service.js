@@ -20,8 +20,19 @@ export class TaskService {
     return data;
   }
 
- async chageColumn(idTask, task){
-    const {data} = await axios.put(`${Config.KTRELLO_URL}/task/change-column/${idTask}`, task)
-    return data
+  async chageColumn(idTask, task) {
+    const { data } = await axios.put(
+      `${Config.KTRELLO_URL}/task/change-column/${idTask}`,
+      task
+    );
+    return data;
+  }
+
+  async editTask(idTask, task) {
+    const { data } = await axios.put(
+      `${Config.KTRELLO_URL}/task/${idTask}`,
+      task
+    );
+    return data;
   }
 }

@@ -57,6 +57,19 @@ export class TaskController {
     }
   }
 
+  async edittask(idTask, task){
+    try {
+      const { data } = await this.#taskService.editTask(idTask, task);
+      const message = `La tarea ${data.name} editado con exito`
+      PopUp.messageSuccess(message);
+      setTimeout(() => {
+        location.reload();
+      }, 1500);
+    } catch (error) {
+      PopUp.errorPopUp(error.response?.data.message || error.message);
+    }
+  }
+
 }
 
 const taskController = new TaskController();
