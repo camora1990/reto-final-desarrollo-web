@@ -86,6 +86,8 @@ export default class BoardServices {
           task.delivery,
           task.createdAt,
           task.updatedAt,
+          task.column,
+          task.board,
           task.log
         );
       });
@@ -100,6 +102,6 @@ export default class BoardServices {
 
     board.columns = columns;
 
-    return board
+    return board;
   }
 }
