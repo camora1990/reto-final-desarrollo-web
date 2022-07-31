@@ -93,3 +93,9 @@ body {
     gap: 10px;
   }
 }
+
+.arrows i{
+
+  cursor: pointer;
+  font-size: 25px;
+}
