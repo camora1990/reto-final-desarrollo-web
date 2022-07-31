@@ -1,9 +1,9 @@
 /**
- * Utilidades generales de la aplicacion como creacioin de componentes
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Utilidades generales de la aplicacion como creacion de componentes
+ * @class Utilities
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
-
  class Utilities {
     /**
      *
@@ -26,6 +26,9 @@
       return tag;
     }
   }
+  /**
+   * Instancia a exportar Utilities() y ser utilizada desde otro lugar
+   */
   
   const utilities = new Utilities();
   

@@ -1,16 +1,15 @@
 /**
- * Modelo de los columnas
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Modelo de una columna
+ * @class ColumnModel
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
-
 export class ColumnModel {
   #id;
   #name;
   #createdAt;
   #updatedAt;
   #tasks = [];
-
   /**
    * Constructor para la creacion de columnas
    * @param {number} id 

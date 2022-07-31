@@ -1,9 +1,9 @@
 import { PopUp } from "../../utilities/popUps.js";
-
 /**
- * Clase para crear el modal de creacion
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Clase para crear modal de creacion
+ * @class ModalFormBoard
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
 export class ModalFormBoard {
   #newBoard;
@@ -66,7 +66,6 @@ export class ModalFormBoard {
       .addEventListener("submit", this.#submitFormBoard());
     return frangment.content;
   }
-
   /**
    * Evento submit del formulario de creacion
    * @returns - retorna el evento para crear el board
@@ -85,8 +84,7 @@ export class ModalFormBoard {
       this.#createBoard();
     };
   }
-
- /**
+  /**
   * Metodo para crear un board
   */
   #createBoard() {
@@ -108,14 +106,13 @@ export class ModalFormBoard {
       }
     });
   }
-
   /**
    * Metodo para editar un board
-   * @param {Board} board -  board a editar
-   * @param {Integer} idBoard - id del board
+   * @param {Object} board -  board a editar
+   * @param {number} idBoard - id del board
    */
   #editBoard(board, idBoard) {
-    const message = "Estas seguro de editar este board";
+    const message = "Estas seguro de editar este board"; 
     PopUp.confirmationPopUp(message).then(async (result) => {
       if (result.isConfirmed) {
         try {

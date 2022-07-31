@@ -1,9 +1,9 @@
 import { taskComponent } from "./taskComponent.js";
-
 /**
  * Clase para crear el componente columna
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * @class ColumnComponent
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
 export class ColumnComponent {
   #component;
@@ -24,7 +24,6 @@ export class ColumnComponent {
    * Metodo para crear los nodos de tipo columna en el DOM
    * @param {Array} columns - Array de columnas de tipo ColumnModel
    */
-
   #createColumn(columns) {
     columns.forEach((column, i) => {
       const columFragmen = document.createElement("template");
@@ -54,10 +53,12 @@ export class ColumnComponent {
       this.#parentNode.append(columFragmen.content);
     });
   }
-
+  /**
+   * Evento para crear la tarea
+   * @returns evento para crear la tarea
+   */
   #eventcreateTask() {
     return (event) => {
-      ;
       const formTask = document.getElementById("form-task");
       formTask.setAttribute("data-columnid", event.target.dataset.columnid);
       formTask.setAttribute("data-boardid", this.#boardId);

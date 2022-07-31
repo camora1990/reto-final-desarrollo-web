@@ -1,9 +1,9 @@
 /**
- * Modelo de los tableros
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Modelo de un tablero
+ * @class BoardModel
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
-
 export class BoardModel {
   #name;
   #id;

@@ -1,6 +1,11 @@
 import taskController from "../../controller/task.controller.js";
 import { PopUp } from "../../utilities/popUps.js";
-
+/**
+ * Clase para crear el modal de creacion para una tarea
+ * @class ModaTaskComponent
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
+ */
 export class ModaTaskComponent {
   #parenNode;
   #task;
@@ -12,7 +17,9 @@ export class ModaTaskComponent {
     this.#createmodalTask();
     this.#createModalLog();
   }
-
+  /**
+   * Metodo para crear el modal de tarea
+   */
   #createmodalTask() {
     const modal = `<div
         class="modal fade "
@@ -76,13 +83,16 @@ export class ModaTaskComponent {
       </div>
   `;
     const frangment = document.createElement("template");
-    frangment.innerHTML = modal;
+    frangment.innerHTML = modal;                                //Inyecta el modal al DOM
     frangment.content
       .getElementById("form-task")
-      .addEventListener("submit", this.#submitForm());
-    this.#parenNode.append(frangment.content);
+      .addEventListener("submit", this.#submitForm());          //Evento submit para la creacion de tarea
+    this.#parenNode.append(frangment.content);                  //Agrega el nodo al DOM
   }
-
+  /**
+   * Metodo que contiene el evento para crear una tarea
+   * @returns evento de creacion(tarea)
+   */
   #submitForm() {
     return (event) => {
       this.#task = {};
@@ -105,6 +115,10 @@ export class ModaTaskComponent {
       }
     };
   }
+  /**
+   * Metodo para editar la tarea
+   * @param {number} idTask 
+   */
 
   #EditTask(idTask) {
     const message = "Estas seguro de guardar la tarea";
@@ -114,7 +128,9 @@ export class ModaTaskComponent {
       }
     });
   }
-
+  /**
+   * Metodo para crear la tarea
+   */
   #createTask() {
     const message = "Estas seguro de guardar la tarea";
     PopUp.confirmationPopUp(message).then((result) => {
@@ -123,7 +139,9 @@ export class ModaTaskComponent {
       }
     });
   }
-
+  /**
+   * Modal para crear un log
+   */
   #createModalLog() {
     const modal = `<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -142,6 +160,6 @@ export class ModaTaskComponent {
   </div>`;
     const fragment = document.createElement("template");
     fragment.innerHTML = modal;
-    this.#parenNode.append(fragment.content);
+    this.#parenNode.append(fragment.content); //Agrega el nodo al DOM
   }
 }

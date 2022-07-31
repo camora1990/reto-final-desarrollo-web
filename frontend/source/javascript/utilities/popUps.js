@@ -1,9 +1,9 @@
 /**
- * Clase que maneja todos los modales de la aplicacion
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Clase que maneja todos los modelos de la aplicacion
+ * @class PopUp
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
-
 export class PopUp {
   /**
    *

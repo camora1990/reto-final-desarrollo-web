@@ -1,15 +1,20 @@
 import taskController from "../../controller/task.controller.js";
 import { PopUp } from "../../utilities/popUps.js";
 /**
- * Clase para crear las tareas
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Clase para crear los tableros
+ * @class taskComponent
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
 export class taskComponent {
   #parenNode;
   #task;
   #taskController;
-
+  /**
+   * 
+   * @param {TaskModel} task 
+   * @param {HTMLElement} parentNode 
+   */
   constructor(task, parentNode) {
     this.#parenNode = parentNode;
     this.#task = task;
@@ -29,11 +34,11 @@ export class taskComponent {
             <div class="card-body text-light text-start">
             <p class="card-title">${task.name}</p>
             <div class="d-flex justify-content-between my-3">
-            <div>
+            <div id="cont-date-create">
                 <i class="fa-solid fa-clock me-1"></i>
                 <span class="text-muted">Creada: ${createdAt}</span>
                 </div>
-                <div>
+            <div id="cont-deleviry">
                 <i class="fa-solid fa-clock me-1"></i>
                 <span class="text-muted">Entrega: ${
                   delivery ? delivery : "N/A"
@@ -52,7 +57,7 @@ export class taskComponent {
                     ? '<i id="back" class="fa-solid fa-circle-arrow-left"></i>'
                     : ""
                 }
-                Mover
+                <div class="text-arrow">Mover</div>
                 ${
                   task.column < 3
                     ? '<i id="next" class="fa-solid fa-circle-arrow-right"></i>'
@@ -109,7 +114,10 @@ export class taskComponent {
       });
     };
   }
-
+  /**
+   * Metodo para mover una tarea hacia atras
+   * @returns envento para mover la tarea
+   */
   #eventBackColumn() {
     return (event) => {
       const task = {
@@ -119,10 +127,12 @@ export class taskComponent {
       this.#taskController.changeColumn(this.#task.id, task);
     };
   }
-
+  /**
+   * Metodo para mover una tarea hacia adelante
+   * @returns envento para mover la tarea
+   */
   #eventNextColumn() {
     return (event) => {
-      debugger;
       const task = {
         ...this.#task,
         column: this.#task.column + 1,
@@ -130,10 +140,12 @@ export class taskComponent {
       this.#taskController.changeColumn(this.#task.id, task);
     };
   }
-
+  /**
+   * Metodo encargado de mostrar el historial(Log)
+   * @returns Modal con la informacion
+   */
   #showLog() {
     return () => {
-      debugger;
       document.getElementById("staticBackdropLabel").innerText = this.#task.name
       let details = `
       <h5>Descripción</h5>
@@ -159,7 +171,10 @@ export class taskComponent {
       bodyModallog.innerHTML = details;
     };
   }
-
+  /**
+   * Metodo con el evento para editar una tarea
+   * @returns evento para editar
+   */
   #EventButtonEdit() {
     return (event) => {
       const form = document.getElementById("form-task");

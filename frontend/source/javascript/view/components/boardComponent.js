@@ -1,9 +1,9 @@
 import { PopUp } from "../../utilities/popUps.js";
-
 /**
- * Clase para crear los componentes o tarjetas de los tableros
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Clase para crear las tarjetas o componentes de los tableros
+ * @class BoardComponent
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
 export class BoardComponent {
   #board;
@@ -23,12 +23,10 @@ export class BoardComponent {
     this.#component = this.#createComponent(board);
     this.#addContent();
   }
-
   /**
    * Crea el componente o la card del board
    * @returns - retorna el componente creado (Nodo)
    */
-
   #createComponent() {
     const createdat = moment(this.#board.createdAt).format("l");
     const boardComponente = `<div class="col-12 col-md-6 col-lg-4 mb-3">
@@ -65,14 +63,12 @@ export class BoardComponent {
       .addEventListener("click", this.#eventEditBoard());
     return fragnmet.content;
   }
-
   /**
    * Agrega el componente al DOM 
    */
   #addContent() {
     this.#parentNode.append(this.#component);
   }
-
   /**
    * Evento click agregado en el boton de eliminacion de cada tablero
    * @returns - Evento de eliminacion del board

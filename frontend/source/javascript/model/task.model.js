@@ -1,3 +1,9 @@
+/**
+ * Modelo de una tarea
+ * @class TaskModel
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
+ */
 export class TaskModel {
   #id;
   #name;
@@ -8,7 +14,18 @@ export class TaskModel {
   #log;
   #board;
   #column;
-
+  /**
+   * Constructor para crear una tarea
+   * @param {number} id 
+   * @param {String} name 
+   * @param {String} description 
+   * @param {Data} delivery 
+   * @param {Date} createdAt 
+   * @param {Date} updatedAt 
+   * @param {number} column 
+   * @param {Object} board 
+   * @param {Array} log 
+   */
   constructor(
     id,
     name,

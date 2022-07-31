@@ -1,15 +1,14 @@
 /**
- * Modelo de los logs
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Modelo de un log
+ * @class LogModel
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
-
 export class LogModel {
   #id;
   #previous;
   #current;
   #createdAt;
-
   /**
    * Constructor para cear un log
    * @param {number} id 

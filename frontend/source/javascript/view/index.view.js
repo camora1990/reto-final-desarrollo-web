@@ -1,13 +1,12 @@
 import { utilities } from "../utilities/utilities.js";
 import { BoardComponent } from "./components/boardComponent.js";
 import { ModalFormBoard } from "./components/modalFormComponent.js";
-
 /**
- * Clase que inicia la pagina board
- * @class
- * @author Camilo Morales Sanchez - Juan Camilo Castñeda Castro
+ * Clase para la vista de los tablero
+ * @class taskComponent
+ * @author Camilo Morales Sanchez - Juan Camilo Castañeda Castro
+ * @version 1.0.0
  */
-
 export class IndexView {
   #body;
   #modalForm;
@@ -24,7 +23,6 @@ export class IndexView {
     this.#createModal();
     this.#buttonCreate();
   }
-
   /**
    * Metodo para crear el componente board
    */
@@ -38,7 +36,6 @@ export class IndexView {
     this.#section.append(this.#row);
     this.#container.append(this.#section);
   }
-
   /**
    * Metodo que crea los componentes en el dom para el index.html
    * @param {Array} boards -Lista de tipo BoardModel
@@ -51,11 +48,9 @@ export class IndexView {
       new BoardComponent(board, this.#row, this.#boardController);
     });
   }
-
   /**
    * Metodo para crear el boton de crear nuevo board
    */
-
   #buttonCreate() {
     const button = `<button id="create-board"
     class="btn btn-outline-success"
@@ -72,19 +67,16 @@ export class IndexView {
       .addEventListener("click", this.#eventCreateBoard());
     this.#container.insertBefore(frangment.content, this.#section);
   }
-
   /**
    * Agrega el modal al DOM
    */
   #createModal() {
     this.#body.append(this.#modalForm.modalForm);
   }
-
   /**
    * Evento de para crear un board
    * @returns - evento para la creacion de un board
    */
-
   #eventCreateBoard() {
     return (event) => {
       document.getElementById("boardModalLabel").innerText = "Crear tablero";
