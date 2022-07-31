@@ -43,6 +43,20 @@ export class TaskController {
       PopUp.errorPopUp(error.response?.data.message || error.message);
     }
   }
+
+  async changeColumn(idTask, task){
+    try {
+      const { data } = await this.#taskService.chageColumn(idTask, task);
+      const message = `La tarea ${data.name} cambio de estado exito`
+      PopUp.messageSuccess(message);
+      setTimeout(() => {
+        location.reload();
+      }, 1500);
+    } catch (error) {
+      PopUp.errorPopUp(error.response?.data.message || error.message);
+    }
+  }
+
 }
 
 const taskController = new TaskController();

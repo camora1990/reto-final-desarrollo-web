@@ -19,4 +19,9 @@ export class TaskService {
     const { data } = await axios.post(`${Config.KTRELLO_URL}/task/`, task);
     return data;
   }
+
+ async chageColumn(idTask, task){
+    const {data} = await axios.put(`${Config.KTRELLO_URL}/task/change-column/${idTask}`, task)
+    return data
+  }
 }

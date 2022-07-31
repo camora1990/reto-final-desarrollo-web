@@ -63,6 +63,13 @@ export class taskComponent {
     fragment.content
       .getElementById("delete-task")
       .addEventListener("click", this.#deleteTask());
+      
+      const arrowBack = fragment.content.getElementById("back");
+      arrowBack && arrowBack.addEventListener("click", this.#eventBackColumn());
+
+      const arrowNext = fragment.content.getElementById("next");
+      arrowNext && arrowNext.addEventListener("click", this.#eventNextColumn());
+
     this.#parenNode.append(fragment.content);
   }
   /**
@@ -83,13 +90,17 @@ export class taskComponent {
 
   #eventBackColumn(){
     return(event)=>{
-
+      this.#task.column--;
+       this.#taskController.changeColumn(this.#task.id, this.#task)
     }
   }
 
   #eventNextColumn(){
     return(event)=>{
-      
+       const column = {
+        "column": this.column+1
+       }
+       this.#taskController.changeColumn(this.#task.id, column)
     }
   }
 }

@@ -58,4 +58,7 @@ export class TaskModel {
   get log() {
     return this.#log;
   }
+  set column(column) {
+    this.#column = column;
+  }
 }
