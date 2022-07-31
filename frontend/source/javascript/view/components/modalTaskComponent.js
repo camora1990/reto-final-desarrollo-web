@@ -6,16 +6,16 @@ export class ModaTaskComponent {
   #task;
   #boardId;
   constructor(boardId) {
-    ;
     this.#parenNode = document.querySelector("body");
     this.#boardId = boardId;
     this.#task = {};
     this.#createmodalTask();
+    this.#createModalLog();
   }
 
   #createmodalTask() {
     const modal = `<div
-        class="modal fade"
+        class="modal fade "
         id="taskModal"
         tabindex="-1"
         aria-labelledby="taskModalLabel"
@@ -85,7 +85,6 @@ export class ModaTaskComponent {
 
   #eventSaveTask() {
     return (event) => {
-      ;
       this.#task = {};
       event.preventDefault();
       this.#task.name = event.target[0].value;
@@ -101,5 +100,26 @@ export class ModaTaskComponent {
         }
       });
     };
+  }
+
+  #createModalLog() {
+    const modal = `<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content card-custom">
+        <div class="modal-header">
+          <h5 class="modal-title text-light" id="staticBackdropLabel">Log</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-light" id="log">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    const fragment = document.createElement("template");
+    fragment.innerHTML = modal;
+    this.#parenNode.append(fragment.content);
   }
 }
