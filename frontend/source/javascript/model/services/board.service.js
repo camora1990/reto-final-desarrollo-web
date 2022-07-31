@@ -78,7 +78,9 @@ export default class BoardServices {
       boardResponse.updatedAt
     );
     const columns = columnsResponse.map((colum) => {
+      debugger
       const tasks = colum.tasks.map((task) => {
+        debugger
         return new TaskModel(
           task.id,
           task.name,
@@ -88,7 +90,7 @@ export default class BoardServices {
           task.updatedAt,
           task.column,
           task.board,
-          task.log
+          task.logs
         );
       });
       return new ColumnModel(
