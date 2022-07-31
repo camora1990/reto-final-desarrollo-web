@@ -128,6 +128,14 @@ export class taskComponent {
   #showLog() {
     return () => {
       debugger;
+      document.getElementById("staticBackdropLabel").innerText = this.#task.name
+      let details = `
+      <h5>Descripción</h5>
+      <p>${this.#task.description}</p>
+
+      ${this.#task.delivery ? `<p><strong>Entrega: </strong><span>${moment(this.#task.delivery).format("l")}</span></p>` : "" }
+      <h5>Log: </h5>`
+
       const bodyModallog = document.getElementById("log");
       let list = "";
       const columns = ["Por realizar", "En progreso", "Terminado", ""];
@@ -141,7 +149,8 @@ export class taskComponent {
       </li>
         `;
       });
-      bodyModallog.innerHTML = `<ol>${list}</ol>`;
+      details+=`<ol>${list}</ol>`
+      bodyModallog.innerHTML = details;
     };
   }
 }
