@@ -93,9 +93,13 @@ body {
     gap: 10px;
   }
 }
-
 .arrows i{
-
   cursor: pointer;
   font-size: 25px;
+}
+.arrows i:hover{
+  color: white;
+}
+.text-muted {
+  margin-top: 6px;
 }
